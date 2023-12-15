@@ -25,7 +25,6 @@ namespace DataAccessLayer.Repositories
         {
             using var c = new Context();
             c.Remove(blog);
-
             c.SaveChanges();
         }
 
