@@ -9,10 +9,10 @@ namespace BusinessLayer.Abstract
 {
     public interface IGenericService<T> where T : class,new()
     {
-        void TAdd(Category category);
-        void TDelete(Category category);
-        void CategoryUpdate(Category category);
-        List<Category> GetList();
-        Category GetById(int id);
+        //void TAdd(Category category);
+        //void TDelete(Category category);
+        //void CategoryUpdate(Category category);
+        //List<Category> GetList();
+        //Category GetById(int id);
     }
 }
