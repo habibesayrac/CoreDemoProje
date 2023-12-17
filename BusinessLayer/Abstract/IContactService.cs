@@ -9,11 +9,11 @@ namespace BusinessLayer.Abstract
 {
 	public interface IContactService
 	{
-		void ContactAdd(Contact contact);
-		void ContactDelete(Contact contact);
-		void ContactUpdate(Contact contact);
-		List<Contact> GetListAll();
-		Contact GetByID(int id);
+		//void ContactAdd(Contact contact);
+		//void ContactDelete(Contact contact);
+		//void ContactUpdate(Contact contact);
+		//List<Contact> GetListAll();
+		//Contact GetByID(int id);
 
 	}
 }

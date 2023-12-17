@@ -6,7 +6,6 @@
 
 <!DOCTYPE html>
 <html lang="zxx">
-
 <body>
 	<!--//banner-->
 	<section class="banner-bottom">
@@ -45,7 +44,6 @@
 									</ul>
 								</div>
 							</div>
-
 							<h3>
 								<a href="single.html"> @item.BlogTitle </a>
 							</h3>
@@ -54,9 +52,9 @@
 							</p>
 							<a href="/Blog/Index/" class="btn btn-primary read-m"> Blog Listesi</a>
 						</div>
-					}					
-
-					@await Html.PartialAsync("~/Views/Comment/CommentListByBlog.cshtml")
+					}	
+					@await Component.InvokeAsync("CommentList")
+					@*@await Html.PartialAsync("~/Views/Comment/CommentListByBlog.cshtml")*@
 					@await Html.PartialAsync("~/Views/Comment/PartialAddComment.cshtml")
 				
 				</div>
@@ -114,7 +112,6 @@
 										</span>
 									</div>
 								</div>
-
 							</div>
 							<div class="blog-grids row mb-3">
 								<div class="col-md-5 blog-grid-left">
@@ -132,7 +129,6 @@
 										</span>
 									</div>
 								</div>
-
 							</div>
 						</div>
 						<div class="single-gd my-5 tech-btm">
