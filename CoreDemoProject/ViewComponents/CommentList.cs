@@ -1,7 +1,7 @@
 ﻿using CoreDemoProject.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CoreDemoProject.ViewComponents
+namespace CoreDemoProject.ViewComponents.CommentList
 {
 	public class CommentList : ViewComponent
 	{
