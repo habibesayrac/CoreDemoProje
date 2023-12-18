@@ -5,13 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoreDemoProject.ViewComponents.Comment
 {
-	public class CommentListByBlog:ViewComponent
+	public class CommentListByBlog : ViewComponent
 	{
 		CommentManager commentManager = new CommentManager(new EfCommentRepository());
-		public IViewComponentResult Invoke()
+		public IViewComponentResult Invoke(int id)
 		{
-			var values = commentManager.GetList(9);
-						
+			var values = commentManager.GetList(id);
+
 			return View(values);
 		}
 	}
