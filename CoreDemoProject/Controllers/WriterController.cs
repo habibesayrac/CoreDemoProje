@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoreDemoProject.Controllers
 {
-      public class WriterController : Controller
-    {    
+    public class WriterController : Controller
+    {
         public IActionResult Index()
         {
             return View();
@@ -13,7 +13,12 @@ namespace CoreDemoProject.Controllers
         {
             return View();
         }
-               public IActionResult WriterMail()
+        public IActionResult WriterMail()
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        public IActionResult Test()
         {
             return View();
         }
