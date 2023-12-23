@@ -11,7 +11,7 @@ namespace CoreDemoProject.Controllers
         BlogManager blogManager = new BlogManager(new EfBlogRepository());
         public IActionResult Index()
         {
-            var values = blogManager.GetBlogListWithCategory(); 
+            var values = blogManager.GetBlogListWithCategory();
             return View(values);
         }
         public IActionResult BlogReadAll(int id)
@@ -20,6 +20,11 @@ namespace CoreDemoProject.Controllers
             var values = blogManager.GetBlogByID(id);
             return View(values);
 
+        }
+        public IActionResult BlogListByWriter()
+        {
+           var values=  blogManager.GetBlogByWriter(1);
+            return View(values);
         }
     }
 }
