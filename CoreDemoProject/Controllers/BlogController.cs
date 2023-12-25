@@ -70,6 +70,22 @@ namespace CoreDemoProject.Controllers
 			}
 			return View();
 		}
-
+		public IActionResult DeleteBlog(int id)
+		{
+			var blogvalue = blogManager.TGetById(id);
+			blogManager.TDelete(blogvalue);
+			return RedirectToAction("BlogListByWriter");
+		}
+		[HttpGet]
+		public IActionResult EditBlog(int id)
+		{
+			var blogvalue = blogManager.TGetById(id);
+			return View(blogvalue);
+		}
+		[HttpPost]
+		public IActionResult EditBlog(Blog p)
+		{
+			return RedirectToAction("BlogListByWriter");
+		}
 	}
 }
