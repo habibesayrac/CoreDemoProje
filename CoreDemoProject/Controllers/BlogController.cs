@@ -9,60 +9,67 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CoreDemoProject.Controllers
 {
-    [AllowAnonymous]
-    public class BlogController : Controller
-    {
-        BlogManager blogManager = new BlogManager(new EfBlogRepository());
-        public IActionResult Index()
-        {
-            var values = blogManager.GetBlogListWithCategory();
-            return View(values);
-        }
-        public IActionResult BlogReadAll(int id)
-        {
-            ViewBag.i = id;
-            var values = blogManager.GetBlogByID(id);
-            return View(values);
+	[AllowAnonymous]
+	public class BlogController : Controller
+	{
+		BlogManager blogManager = new BlogManager(new EfBlogRepository());
+		public IActionResult Index()
+		{
+			var values = blogManager.GetBlogListWithCategory();
+			return View(values);
+		}
+		public IActionResult BlogReadAll(int id)
+		{
+			ViewBag.i = id;
+			var values = blogManager.GetBlogByID(id);
+			return View(values);
 
-        }
-        public IActionResult BlogListByWriter()
-        {
-            var values = blogManager.GetBlogByWriter(1);
-            return View(values);
-        }
-       
-        [HttpGet]
-        public IActionResult BlogAdd()
-        {
-            //List<SelectListItem> 
-            return View();
-        }
+		}
+		public IActionResult BlogListByWriter()
+		{
+			var values = blogManager.GetListWithCategoryByWriterBm(1);
+			return View(values);
+		}
 
-        [HttpPost]
-        public IActionResult BlogAdd(Blog p)
-        {
-            BlogValidator bv = new BlogValidator();
+		[HttpGet]
+		public IActionResult BlogAdd()
+		{
+			CategoryManager categoryManager = new CategoryManager(new EfCategoryRepository());
+			List<SelectListItem> categoryvalues = (from x in categoryManager.GetList()
+												   select new SelectListItem
+												   {
+													   Text = x.CategoryName,
+													   Value = x.CategoryID.ToString()
+												   }).ToList();
+			ViewBag.cv = categoryvalues;
+			return View();
+		}
 
-            ValidationResult results = bv.Validate(p);
-            if (results.IsValid)
-            {
-                p.BlogStatus = true;
-                p.BlogCreateDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-                p.WriterID = 1;
+		[HttpPost]
+		public IActionResult BlogAdd(Blog p)
+		{
+			BlogValidator bv = new BlogValidator();
 
-                blogManager.TAdd(p);
+			ValidationResult results = bv.Validate(p);
+			if (results.IsValid)
+			{
+				p.BlogStatus = true;
+				p.BlogCreateDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+				p.WriterID = 1;
 
-                return RedirectToAction("BlogListByWriter", "Blog");
-            }
-            else
-            {
-                foreach (var item in results.Errors)
-                {
-                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-                }
-            }
-            return View();
-        }
-       
-    }
+				blogManager.TAdd(p);
+
+				return RedirectToAction("BlogListByWriter", "Blog");
+			}
+			else
+			{
+				foreach (var item in results.Errors)
+				{
+					ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+				}
+			}
+			return View();
+		}
+
+	}
 }

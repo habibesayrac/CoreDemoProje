@@ -25,7 +25,7 @@
 
 	<br />
 	@Html.Label("Kategori")
-	@Html.TextBoxFor(x=>x.CategoryID, new { @class="form-control"})
+	@Html.DropDownListFor(x=>x.CategoryID,(List<SelectListItem>)ViewBag.cv,new {@class="form-control"})
 
 	<br />
 	@Html.Label("Blog İçerigi")
@@ -33,6 +33,4 @@
 	@Html.ValidationMessageFor(x=>x.BlogContent)
 
 	<button class="btn btn-info">Yazıyı Kaydet</button>
-
-
 }
