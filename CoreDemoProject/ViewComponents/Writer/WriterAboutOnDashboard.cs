@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CoreDemoProject.ViewComponents.Writer
 {
 
-    public class WriterAboutOnDashboard :ViewComponent
+    public class WriterAboutOnDashboard : ViewComponent
     {
         WriterManager writerManager = new WriterManager(new EfWriterRepository());
         public IViewComponentResult Invoke()
@@ -13,6 +13,5 @@ namespace CoreDemoProject.ViewComponents.Writer
             var values = writerManager.GetWriterByID(1);
             return View(values);
         }
-
     }
 }

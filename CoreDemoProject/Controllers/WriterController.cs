@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using BusinessLayer.Concrete;
+using DataAccessLayer.EntityFramework;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreDemoProject.Controllers
 {
     public class WriterController : Controller
     {
+        WriterManager writerManager = new WriterManager(new EfWriterRepository());
         public IActionResult Index()
         {
             return View();
@@ -34,6 +37,12 @@ namespace CoreDemoProject.Controllers
         public PartialViewResult WriterFooterPartial()
         {
             return PartialView();
+        }
+        [AllowAnonymous]
+        public IActionResult WriterEditProfile()
+        {
+            var writervalues = writerManager.TGetById(1);
+            return View(writervalues);
         }
     }
 }
