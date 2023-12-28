@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <Folder Include="ViewComponents\About\" />
+    <Folder Include="wwwroot\WriterImageFiles\" />
   </ItemGroup>
 
 </Project>
