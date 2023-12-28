@@ -5,10 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLayer.Abstract
+namespace DataAccessLayer.Abstract
 {
-    public interface IMessageService :IGenericService<Message>
+    public interface IMessage2Dal:IGenericDal<Message2>
     {
-        List<Message> GetInboxListByWriter(string p);
     }
 }
