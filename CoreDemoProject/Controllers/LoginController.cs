@@ -7,36 +7,35 @@ using System.Security.Claims;
 
 namespace CoreDemoProject.Controllers
 {
-	[AllowAnonymous]
-	public class LoginController : Controller
-	{
-		public IActionResult Index()
-		{
-			return View();
-		}
+    [AllowAnonymous]
+    public class LoginController : Controller
+    {
+        public IActionResult Index()
+        {
+            return View();
+        }
 
-		[HttpPost]
-		public async Task<IActionResult> Index(Writer p)
-		{
-			Context c = new();
-			var datavalue = c.Writers.FirstOrDefault(x => x.WriterMail == p.WriterMail && x.WriterPassword == p.WriterPassword);
-			if (datavalue != null)
-			{
-				var claims = new List<Claim>
-				{
-					new Claim(ClaimTypes.Name,p.WriterMail)
-				};
-				var useridentity = new ClaimsIdentity(claims, "a");
-				ClaimsPrincipal principal = new ClaimsPrincipal(useridentity);
-				await HttpContext.SignInAsync(principal);
+        [HttpPost]
+        public async Task<IActionResult> Index(Writer p)
+        {
+            Context c = new();
+            var datavalue = c.Writers.FirstOrDefault(x => x.WriterMail == p.WriterMail && x.WriterPassword == p.WriterPassword);
+            if (datavalue != null)
+            {
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name,p.WriterMail)
+                };
+                var useridentity = new ClaimsIdentity(claims, "a");
+                ClaimsPrincipal principal = new ClaimsPrincipal(useridentity);
+                await HttpContext.SignInAsync(principal);
 
-				return RedirectToAction("Index", "Writer");
-			}
-			else
-			{
-				return View();
-			}
-
-		}
-	}
+                return RedirectToAction("Index", "Dashboard");
+            }
+            else
+            {
+                return View();
+            }
+        }
+    }
 }

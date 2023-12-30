@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.Concrete;
 using BusinessLayer.ValidationRules;
 using CoreDemoProject.Models;
+using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
@@ -12,9 +13,17 @@ namespace CoreDemoProject.Controllers
 {
     public class WriterController : Controller
     {
+
         WriterManager writerManager = new WriterManager(new EfWriterRepository());
+
+        [Authorize]
         public IActionResult Index()
         {
+            var usermail = User.Identity.Name;
+            ViewBag.v = usermail;
+            Context context = new();
+            var writerName = context.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterName).FirstOrDefault();
+            ViewBag.v2 = writerName;
             return View();
         }
         public IActionResult WriterProfile()
@@ -43,14 +52,17 @@ namespace CoreDemoProject.Controllers
         {
             return PartialView();
         }
-        [AllowAnonymous]
+      
         [HttpGet]
         public IActionResult WriterEditProfile()
         {
-            var writervalues = writerManager.TGetById(1);
+            Context context = new();
+            var usermail = User.Identity.Name;
+            var writerID = context.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
+            var writervalues = writerManager.TGetById(writerID);
             return View(writervalues);
         }
-        [AllowAnonymous]
+     
         [HttpPost]
         public IActionResult WriterEditProfile(Writer p)
         {
@@ -91,7 +103,7 @@ namespace CoreDemoProject.Controllers
         public IActionResult WriterAdd(AddProfileImage p)
         {
             Writer writer = new();
-            if (p.WriterImage!=null)
+            if (p.WriterImage != null)
             {
                 var extension = Path.GetExtension(p.WriterImage.FileName);
                 var newimagename = Guid.NewGuid() + extension;
