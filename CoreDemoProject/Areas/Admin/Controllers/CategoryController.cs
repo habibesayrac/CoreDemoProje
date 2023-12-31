@@ -5,7 +5,6 @@ using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
-
 using X.PagedList;
 
 namespace CoreDemoProject.Areas.Admin.Controllers
@@ -47,6 +46,13 @@ namespace CoreDemoProject.Areas.Admin.Controllers
             }
             return View();
         }
+        public IActionResult CategoryDelete(int id)
+        {
+			var value = categoryManager.TGetById(id);
+			categoryManager.TDelete(value);
+			return RedirectToAction("Index");
+		}
+		
 
     }
 }
