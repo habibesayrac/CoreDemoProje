@@ -7,19 +7,25 @@
 <br />
 <button type="button" id="btngetlist" class="btn btn-outline-primary">Yazar Listesi</button>
 <button type="button" id="btngetbyid" class="btn btn-outline-success">Yazar Getir</button>
+<button type="button" id="btnaddwriter" class="btn btn-outline-info">Yazar Ekle</button>
 <br />
 <br />
 <div id="writerlist">
-    Buraya yazarlar gelecek
 </div>
 <br />
 <div id="writerget">
-    Buraya 1 yazar gelecek
 </div>
 <br />
 <div>
-    <input type="text" id="writerid" placeholder="Yazar ID Değerini Giriniz" class="form-control"/>
+    <input type="text" id="writerid" placeholder="Yazar ID Değerini Giriniz" class="form-control" />
 </div>
+<br />
+<div>
+    <input type="text" id="txtwriterid" placeholder="Yazar ID " class="form-control" />
+    <input type="text" id="txtwritername" placeholder="Yazar Adı " class="form-control" />
+    <br />
+</div>
+
 @section scripts{
     <script>
         $("#btngetlist").click(function () {
@@ -41,11 +47,40 @@
             });
         });
 
-        $("#btngetbyid").click(x=>{
+        $("#btngetbyid").click(x => {
             let id = $("#writerid").val();
-            console.log(id);
-        })
+            $.ajax({
+                contentType: "application/json",
+                dataType: "json",
+                type: "get",
+                url: "/Admin/Writer/GetWriterByID/",
+                data: { writerid: id },
+                success: function (func) {
+                    let w = jQuery.parseJSON(func);
+                    console.log(w);
+                    let getvalue = `<table class=table table-bordered> <tr> <th> Yazar ID </th> <th>Yazar Adı</th></tr> <tr><td>${w.Id}</td><td>${w.Name}</td></tr></table>`;
+                    $("#writerget").html(getvalue);
+                }
 
+            });
+        });
 
+        $("#btnaddwriter").click(function () {
+
+            let writer = {
+                Id: $("#txtwriterid").val(),
+                Name: $("#txtwritername").val()
+            };
+            $.ajax({
+                type: "post",
+                url: "/Admin/Writer/AddWriter/",
+                data: writer,
+                success: function (func) {
+                    let result = jQuery.parseJSON(func);
+                    alert("Yazar Ekleme İşlemi Başarılı Bir Şekilde Gerçekleşti");
+                }
+            });
+
+        });
     </script>
 }
