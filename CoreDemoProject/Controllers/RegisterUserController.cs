@@ -31,7 +31,7 @@ namespace CoreDemoProject.Controllers
                     UserName = p.UserName,
                     NameSurname = p.NameSurname
                 };
-                var result = await _userManager.CreateAsync(user, p.Password);
+                var result = await _userManager.CreateAsync(user);
 
                 if (result.Succeeded)
                 {
