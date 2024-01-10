@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace CoreDemoProject.Controllers
 {
-    public class EmployeeTestController : Controller
+	[AllowAnonymous]
+
+	public class EmployeeTestController : Controller
     {
         public async Task<IActionResult> Index()
         {

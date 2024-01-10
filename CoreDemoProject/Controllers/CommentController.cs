@@ -1,10 +1,12 @@
 ﻿using BusinessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreDemoProject.Controllers
 {
+	[AllowAnonymous]
 	public class CommentController : Controller
 	{
 		CommentManager commentManager = new CommentManager(new EfCommentRepository());
@@ -20,11 +22,11 @@ namespace CoreDemoProject.Controllers
 		[HttpPost]
 		public IActionResult PartialAddComment(Comment p)
 		{
-			p.CommentDate= DateTime.Parse(DateTime.Now.ToShortDateString());
+			p.CommentDate = DateTime.Parse(DateTime.Now.ToShortDateString());
 			p.CommentStatus = true;
-			p.BlogID = 7;
+			p.BlogID = 10;
 			commentManager.CommentAdd(p);
-			return RedirectToAction("Index","Blog");
+			return RedirectToAction("Index", "Blog");
 		}
 		public PartialViewResult CommentListByBlog(int id)
 		{

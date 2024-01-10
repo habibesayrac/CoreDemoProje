@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CoreDemoProject.Controllers
 {
-    public class ErrorPageController : Controller
+	[AllowAnonymous]
+
+	public class ErrorPageController : Controller
     {
         public IActionResult Error1(int code)
         {

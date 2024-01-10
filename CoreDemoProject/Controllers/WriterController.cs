@@ -11,7 +11,9 @@ using Microsoft.CodeAnalysis.Elfie.Serialization;
 
 namespace CoreDemoProject.Controllers
 {
-    public class WriterController : Controller
+	[AllowAnonymous]
+
+	public class WriterController : Controller
     {
 
         WriterManager writerManager = new WriterManager(new EfWriterRepository());

@@ -3,11 +3,14 @@ using BusinessLayer.ValidationRules;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreDemoProject.Controllers
 {
-    public class RegisterController : Controller
+	[AllowAnonymous]
+
+	public class RegisterController : Controller
     {
         WriterManager writerManager = new WriterManager(new EfWriterRepository());
 
