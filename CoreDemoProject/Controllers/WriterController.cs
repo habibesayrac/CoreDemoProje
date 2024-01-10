@@ -59,7 +59,8 @@ namespace CoreDemoProject.Controllers
         public IActionResult WriterEditProfile()
         {
             Context context = new();
-            var usermail = User.Identity.Name;
+            var username = User.Identity.Name;
+            var usermail = context.Users.Where(x=>x.UserName == username).Select(y=>y.Email).FirstOrDefault();
             var writerID = context.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
             var writervalues = writerManager.TGetById(writerID);
             return View(writervalues);
