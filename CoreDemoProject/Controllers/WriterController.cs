@@ -73,7 +73,7 @@ namespace CoreDemoProject.Controllers
 			//var writervalues = writerManager.TGetById(writerID);
 			//return View(writervalues);
 			//var values = await _userManager.FindByNameAsync(User.Identity.Name);
-			var id = context.Users.Where(x=>x.Email==usermail).Select(y=>y.Id).FirstOrDefault();
+			var id = context.Users.Where(x => x.Email == usermail).Select(y => y.Id).FirstOrDefault();
 			var values = userManager.TGetById(id);
 			return View(values);
 		}
@@ -136,5 +136,6 @@ namespace CoreDemoProject.Controllers
 			writerManager.TAdd(writer);
 			return RedirectToAction("Index", "Dashboard");
 		}
+
 	}
 }

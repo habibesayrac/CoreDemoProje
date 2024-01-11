@@ -4,8 +4,6 @@
     Layout = "~/Views/Shared/WriterLayout.cshtml";
 }
 
-@using (Html.BeginForm("WriterEditProfile", "Writer", FormMethod.Post))
-{
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
@@ -48,7 +46,7 @@
                         <label>Yazar Görsel</label>
                         <input type="file" name="img[]" class="file-upload-default">
                         <div class="input-group col-xs-12">
-                            <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
+                            <input type="text" class="form-control"  asp-for= "ImageUrl" placeholder="Upload Image">
                             <span class="input-group-append">
                                 <button class="file-upload-browse btn btn-gradient-primary" type="button">Resim Seç</button>
                             </span>
@@ -66,4 +64,3 @@
             </div>
         </div>
     </div>
-}
