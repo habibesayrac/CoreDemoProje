@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace CoreDemoProject.Controllers
 {
 	[AllowAnonymous]
-		public class BlogController : Controller
+	public class BlogController : Controller
 	{
 		BlogManager blogManager = new BlogManager(new EfBlogRepository());
 		CategoryManager categoryManager = new CategoryManager(new EfCategoryRepository());
@@ -31,7 +31,8 @@ namespace CoreDemoProject.Controllers
 		}
 		public IActionResult BlogListByWriter()
 		{
-			var usermail = User.Identity.Name;
+			var username = User.Identity.Name;
+			var usermail = context.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
 			var writerID = context.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
 			var values = blogManager.GetListWithCategoryByWriterBm(writerID);
 			return View(values);
@@ -53,7 +54,8 @@ namespace CoreDemoProject.Controllers
 		[HttpPost]
 		public IActionResult BlogAdd(Blog p)
 		{
-			var usermail = User.Identity.Name;
+			var username = User.Identity.Name;
+			var usermail = context.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
 			var writerID = context.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
 
 			BlogValidator bv = new BlogValidator();
@@ -101,7 +103,8 @@ namespace CoreDemoProject.Controllers
 		[HttpPost]
 		public IActionResult EditBlog(Blog p)
 		{
-			var usermail = User.Identity.Name;
+			var username = User.Identity.Name;
+			var usermail = context.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
 			var writerID = context.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
 			p.WriterID = writerID;
 			p.BlogCreateDate = DateTime.Parse(DateTime.Now.ToShortDateString());
