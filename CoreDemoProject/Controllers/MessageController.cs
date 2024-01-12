@@ -22,6 +22,16 @@ namespace CoreDemoProject.Controllers
             var values = message2Manager.GetInboxListByWriter(writerID);
             return View(values);
         }
+        public IActionResult Sendbox()
+        {
+            Context context = new Context();
+			var username = User.Identity.Name;
+			var usermail = context.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
+			var writerID = context.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
+		
+            var values = message2Manager.GetInboxListByWriter(writerID);
+            return View(values);
+        }
 
         public IActionResult MessageDetails(int id)
         {
@@ -30,5 +40,4 @@ namespace CoreDemoProject.Controllers
             return View(value);
         }
     }
-
 }
