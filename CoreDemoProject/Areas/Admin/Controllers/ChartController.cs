@@ -1,10 +1,12 @@
 ﻿using CoreDemoProject.Areas.Admin.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreDemoProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class ChartController : Controller
+    [AllowAnonymous]
+	public class ChartController : Controller
     {
         public IActionResult Index()
         {

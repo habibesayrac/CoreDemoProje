@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CoreDemoProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class WidgetController : Controller
+	[AllowAnonymous]
+	public class WidgetController : Controller
     {
         public IActionResult Index()
         {

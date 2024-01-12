@@ -1,11 +1,13 @@
 ﻿using ClosedXML.Excel;
 using CoreDemoProject.Areas.Admin.Models;
 using DataAccessLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreDemoProject.Areas.Admin.Controllers
 {
 	[Area("Admin")]
+	[AllowAnonymous]
 	public class BlogController : Controller
 	{
 		public IActionResult ExportStaticExcelBlogList()

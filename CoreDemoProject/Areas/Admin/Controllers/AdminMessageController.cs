@@ -3,12 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoreDemoProject.Areas.Admin.Controllers
 {
+	[Area("Admin")]
 	[AllowAnonymous]
-	public class HomeController : Controller
-    {
-        public IActionResult Index()
-        {
-            return View();
-        }
-    }
+	public class AdminMessageController : Controller
+	{
+		public IActionResult Inbox()
+		{
+			return View();
+		}
+	}
 }
