@@ -33,6 +33,10 @@ namespace CoreDemoProject.Areas.Admin.Controllers
             var values = message2Manager.GetInboxListByWriter(writerID);
             return View(values);
         }
+        public IActionResult ComposeMessage()
+        {
+            return View();
+        }
 
     }
 }
