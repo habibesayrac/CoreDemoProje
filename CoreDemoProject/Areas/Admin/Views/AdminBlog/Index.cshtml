@@ -15,14 +15,11 @@
                 <div class="col-md-3">
                     <div class="ibox">
                         <div class="ibox-content product-box">
-                            <div class="product-imitation">
-
-                                <img src=" @item.BlogImage" width="250px" height="250px" />
-
+                        <img src=" @item.BlogImage" width="320px" height="225px" />
                             </div>
                             <div class="product-desc">
                                 <span class="product-price">
-                                @(((DateTime)item.BlogCreateDate).ToString("dd-MMM-yyyy"))
+                                    @(((DateTime)item.BlogCreateDate).ToString("dd-MMM-yyyy"))
                                 </span>
                                 <small class="text-muted">@item.Category.CategoryName</small>
                                 <a href="#" class="product-name"> @item.BlogTitle</a>
@@ -30,13 +27,12 @@
                                     @item.BlogContent
                                 </div>
                                 <div class="m-t text-righ">
-                                    <a href="#" class="btn btn-xs btn-outline btn-primary">Detaylar <i class="fa fa-long-arrow-right"></i> </a>
+                                    <a href="/Blog/BlogRedAll/@item.BlogID" class="btn btn-xs btn-outline btn-primary">Detaylar <i class="fa fa-long-arrow-right"></i> </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            }
+             }
 
         </div>
     </div>
